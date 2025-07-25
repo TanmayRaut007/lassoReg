@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-home"></i> Melbourne House Price Predictor</h1>
+            <p>Fill in the details below to get an estimated price for your property</p>
+        </header>
+        
+        <form action="/predict" method="POST" class="prediction-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="Suburb">Suburb:</label>
+                    <select id="Suburb" name="Suburb" required>
+                        <option value="">Select Suburb</option>
+                        {% for suburb in suburbs %}
+                        <option value="{{ suburb }}">{{ suburb }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Rooms">Number of Rooms:</label>
+                    <input type="number" id="Rooms" name="Rooms" min="1" max="20" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Type">Property Type:</label>
+                    <select id="Type" name="Type" required>
+                        <option value="">Select Type</option>
+                        {% for type in types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Method">Sale Method:</label>
+                    <select id="Method" name="Method" required>
+                        <option value="">Select Method</option>
+                        {% for method in methods %}
+                        <option value="{{ method }}">{{ method }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="SellerG">Real Estate Agent:</label>
+                    <select id="SellerG" name="SellerG" required>
+                        <option value="">Select Agent</option>
+                        {% for seller in seller_gs %}
+                        <option value="{{ seller }}">{{ seller }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Regionname">Region:</label>
+                    <select id="Regionname" name="Regionname" required>
+                        <option value="">Select Region</option>
+                        {% for region in regions %}
+                        <option value="{{ region }}">{{ region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Propertycount">Property Count in Suburb:</label>
+                    <input type="number" id="Propertycount" name="Propertycount" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Distance">Distance from CBD (km):</label>
+                    <input type="number" id="Distance" name="Distance" step="0.1" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="CouncilArea">Council Area:</label>
+                    <select id="CouncilArea" name="CouncilArea" required>
+                        <option value="">Select Council Area</option>
+                        {% for council in council_areas %}
+                        <option value="{{ council }}">{{ council }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Bedroom2">Number of Bedrooms:</label>
+                    <input type="number" id="Bedroom2" name="Bedroom2" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Bathroom">Number of Bathrooms:</label>
+                    <input type="number" id="Bathroom" name="Bathroom" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Car">Number of Car Spaces:</label>
+                    <input type="number" id="Car" name="Car" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Landsize">Land Size (sqm):</label>
+                    <input type="number" id="Landsize" name="Landsize" min="0" step="0.1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="BuildingArea">Building Area (sqm):</label>
+                    <input type="number" id="BuildingArea" name="BuildingArea" min="0" step="0.1" required>
+                </div>
+            </div>
+            
+            <button type="submit" class="predict-button">
+                <i class="fas fa-calculator"></i> Predict Price
+            </button>
+        </form>
+    </div>
+</body>
+</html>

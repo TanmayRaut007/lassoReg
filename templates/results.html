@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-home"></i> Prediction Results</h1>
+        </header>
+        
+        <div class="results-container">
+            {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error in Prediction</h3>
+                    <p>{{ error }}</p>
+                </div>
+            {% else %}
+                <div class="prediction-result">
+                    <h2>Estimated Property Value:</h2>
+                    <div class="price">{{ prediction }}</div>
+                </div>
+                
+                <div class="input-summary">
+                    <h3>Your Input Details:</h3>
+                    <table>
+                        {% for key, value in input_data.items() %}
+                        <tr>
+                            <th>{{ key }}</th>
+                            <td>{{ value }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+            
+            <a href="/" class="back-button">
+                <i class="fas fa-arrow-left"></i> Make Another Prediction
+            </a>
+        </div>
+    </div>
+</body>
+</html>
