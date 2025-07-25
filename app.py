@@ -2,17 +2,18 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import joblib
 import numpy as np
+import os
 
 app = Flask(__name__)
 
 # Load the trained model
-model = joblib.load('model.pkl')
+model = joblib.load(os.path.join(os.path.dirname(__file__), 'model.pkl'))
 
 # Load the original data to get unique values for dropdowns
 data = pd.read_csv("houseData.csv")
 cols_to_use = ['Suburb', 'Rooms', 'Type', 'Method', 'SellerG', 'Regionname', 'Propertycount', 
                'Distance', 'CouncilArea', 'Bedroom2', 'Bathroom', 'Car', 'Landsize', 'BuildingArea', 'Price']
-data = data[cols_to_use]
+data = pd.read_csv(os.path.join(os.path.dirname(__file__), "houseData.csv"))
 
 # Fill missing values as done in the notebook
 cols_to_fill_zero = ['Propertycount', 'Distance', 'Bedroom2', 'Bathroom', 'Car']
